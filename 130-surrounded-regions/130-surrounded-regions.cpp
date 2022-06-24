@@ -5,25 +5,20 @@ public:
         int dy[] = {0, 0, 1, -1};
         int n = board.size(), m = board[0].size();
         queue<pair<int, int>> q;
-        vector<vector<bool>> visited(n, vector<bool>(m, false));
         for(int i = 0; i < n; i++) {
             if(board[i][0] == 'O') {
                 q.push({i, 0});
-                visited[i][0] = true;
             }
             if(board[i][m - 1] == 'O') {
                 q.push({i, m - 1});
-                visited[i][m - 1] = true;
             }
         }
         for(int j = 0; j < m; j++) {
             if(board[0][j] == 'O') {
                 q.push({0, j});
-                visited[0][j] = true;
             }
             if(board[n - 1][j] == 'O') {
                 q.push({n - 1, j});
-                visited[n - 1][j] = true;
             }
         }
         while(!q.empty()) {
@@ -34,9 +29,8 @@ public:
             for(int i = 0; i < 4; i++) {
                 int X = x + dx[i];
                 int Y = y + dy[i];
-                if(X >= 0 && Y >= 0 && X < n && Y < m && board[X][Y] == 'O' && !visited[X][Y]) { 
+                if(X >= 0 && Y >= 0 && X < n && Y < m && board[X][Y] == 'O') { 
                    q.push({X, Y});
-                   visited[X][Y] = true;
                 }
             }
         }
