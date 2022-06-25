@@ -8,17 +8,20 @@ class Solution{
 public:
 	int rowWithMax1s(vector<vector<int> > arr, int n, int m) {
 	    // Brute force
-	    int row = -1, mx = 0;
-	    for(int i = 0; i < n; i++) {
-	        int pos = lower_bound(arr[i].begin(), arr[i].end(), 1) - arr[i].begin();
-	        int cnt = 0;
-	        if(pos < m) cnt = m - pos + 1;
-	        if(cnt > mx) {
-	            mx = cnt;
-	            row = i;
+	    int r = 0, c = m - 1; 
+	    int row = 0;
+	    while(r < n && c >= 0) {
+	        if(arr[r][c] == 1) {
+	            row = r;
+	            c--;
+	        }
+	        else {
+	            r++;
 	        }
 	    }
-	    return row;
+	    if(c == m - 1) return -1;
+	    else 
+	        return row;
 	}
 
 };
