@@ -9,19 +9,22 @@ using namespace std;
 
 class Solution{
 public:
-    int MCM(int *arr, int i, int j, vector<vector<int>> &dp) {
-        if(i == j) return 0;
-        int mn = INT_MAX, cost = 0;
-        if(dp[i][j] != -1) return dp[i][j];
-        for(int k = i; k < j; k++) {
-            cost = MCM(arr, i, k, dp) + MCM(arr, k + 1, j, dp) + arr[i - 1] * arr[k] * arr[j];
-            mn = min(cost, mn);
+    int matrixMultiplication(int n, int arr[]) {
+        vector<vector<int>> dp(n, vector<int>(n, INT_MAX));
+        for(int i = 0; i < n; i++) {
+            dp[i][i] = 0;
         }
-        return dp[i][j] = mn;
-    }
-    int matrixMultiplication(int N, int arr[]) {
-        vector<vector<int>> dp(N, vector<int>(N, -1));
-        return MCM(arr, 1, N - 1, dp);    
+        for(int len = 2; len < n; len++) {
+            for(int i = 1; i < n - len + 1; i++) {
+                int j = i + len - 1;
+                int cost = 0;
+                for(int k = i; k <= j - 1; k++) {
+                    cost = dp[i][k] + dp[k + 1][j] + arr[i - 1] * arr[k] * arr[j];
+                    dp[i][j] = min(cost, dp[i][j]);
+                }
+            }
+        }
+        return dp[1][n - 1];
     }
 };
 
