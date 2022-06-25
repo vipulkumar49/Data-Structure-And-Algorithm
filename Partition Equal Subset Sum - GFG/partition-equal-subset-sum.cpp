@@ -9,14 +9,6 @@ using namespace std;
 
 class Solution{
 public:
-    int getEqualPartition(int *arr, int N, int target, vector<vector<int>> &dp) {
-        if(target == 0) return 1;
-        
-        if(N == 0) return 0;
-        if(dp[N][target] != -1) return dp[N][target];
-        if(arr[N - 1] > target) return getEqualPartition(arr, N - 1, target, dp);
-        return dp[N][target] = getEqualPartition(arr, N - 1, target, dp) || getEqualPartition(arr, N - 1, target - arr[N - 1], dp);
-    }
     int equalPartition(int N, int arr[]) {
         int sum = 0, total = 0;
         for(int i = 0; i < N; i++) {
@@ -24,9 +16,15 @@ public:
         }
         if(total % 2 == 0) {
             int target = total / 2;
-            vector<vector<int>> dp(N + 1, vector<int>(target + 1, - 1));
-            int res = getEqualPartition(arr, N, target, dp);
-            return res; 
+            vector<vector<int>> dp(N + 1, vector<int>(target + 1, 0));
+            for(int i = 0; i <= N; i++) dp[i][0] = 1;
+            for(int i = 1; i <= N; i++) {
+                for(int j = 1; j <= target; j++) {
+                    if(arr[i - 1] > j) dp[i][j] = dp[i - 1][j]; 
+                    else dp[i][j] = dp[i - 1][j] || dp[i - 1][j - arr[i - 1]];
+                }
+            }
+            return dp[N][target];
         }
         else {
             return 0;
