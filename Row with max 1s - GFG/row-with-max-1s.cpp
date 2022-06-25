@@ -9,7 +9,7 @@ public:
 	int rowWithMax1s(vector<vector<int> > arr, int n, int m) {
 	    // Brute force
 	    int r = 0, c = m - 1; 
-	    int row = 0;
+	    int row = -1;
 	    while(r < n && c >= 0) {
 	        if(arr[r][c] == 1) {
 	            row = r;
@@ -19,9 +19,7 @@ public:
 	            r++;
 	        }
 	    }
-	    if(c == m - 1) return -1;
-	    else 
-	        return row;
+	    return row;
 	}
 
 };
