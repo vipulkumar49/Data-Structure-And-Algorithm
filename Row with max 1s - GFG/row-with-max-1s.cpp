@@ -10,10 +10,9 @@ public:
 	    // Brute force
 	    int row = -1, mx = 0;
 	    for(int i = 0; i < n; i++) {
+	        int pos = lower_bound(arr[i].begin(), arr[i].end(), 1) - arr[i].begin();
 	        int cnt = 0;
-	        for(int j = 0; j < m; j++) {
-	            cnt += (arr[i][j] == 1);
-	        }
+	        if(pos < m) cnt = m - pos + 1;
 	        if(cnt > mx) {
 	            mx = cnt;
 	            row = i;
