@@ -8,16 +8,10 @@ using namespace std;
 class Solution{
     public:
     string removeConsecutiveCharacter(string S) {
-        if(S.empty()) {
-            return S;
-        }
+        if(S.empty()) return S;
         string res;
-        if(S[0] == S[1]) {
-            res = removeConsecutiveCharacter(S.substr(1));
-        }
-        else {
-            res = S[0] + removeConsecutiveCharacter(S.substr(1));
-        }
+        if(S[0] == S[1]) res = removeConsecutiveCharacter(S.substr(1));
+        else res = S[0] + removeConsecutiveCharacter(S.substr(1));
         return res;
     }
 };
