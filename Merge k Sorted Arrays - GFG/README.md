@@ -1,5 +1,5 @@
 # Merge k Sorted Arrays
-## Medium 
+##  Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given <strong>K</strong> sorted arrays arranged in the form of a matrix of size K*K. The task is to merge them into one sorted array.<br>
 <strong>Example 1:</strong> </span></p>
