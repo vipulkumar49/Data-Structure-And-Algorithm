@@ -22,12 +22,23 @@ class Solution
     vector<int> mergeKArrays(vector<vector<int>> arr, int K) {
         // TC - O(K * K log K) SC - O(K * K)
         vector<int> res;
+        map<int, int> index;
+        for(int i = 0; i < K; i++) index[i] = 0;
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
         for(int i = 0; i < K; i++) {
-            for(int j = 0; j < K; j++) {
-                res.push_back(arr[i][j]);
+            pq.push({arr[i][0], i});
+        }
+        while(!pq.empty()) {
+            int ele = pq.top().first;
+            int i = pq.top().second;
+            pq.pop();
+            res.push_back(ele);
+            if(index[i] < K - 1) {
+                index[i]++;
+                pq.push({arr[i][index[i]], i});
             }
         }
-        sort(res.begin(), res.end());
+        
         return res;
     }
 };
