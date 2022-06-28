@@ -38,7 +38,6 @@ class Solution
                 pq.push({arr[i][index[i]], i});
             }
         }
-        
         return res;
     }
 };
