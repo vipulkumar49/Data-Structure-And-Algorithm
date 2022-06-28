@@ -48,12 +48,11 @@ class Solution{
     //Function to merge K sorted linked list.
     Node * mergeKLists(Node *arr[], int K) {
         Node* head = NULL, *tail = NULL;
-        priority_queue<pair<int, pair<int, Node*>>, vector<pair<int, pair<int, Node*>>>, greater<pair<int, pair<int, Node*>>>> pq;
-        for(int i = 0; i < K; i++) pq.push({arr[i]->data, {i, arr[i]}});
+        priority_queue<pair<int, Node*>, vector<pair<int, Node*>>, greater<pair<int, Node*>>> pq;
+        for(int i = 0; i < K; i++) pq.push({arr[i]->data, arr[i]});
         while(!pq.empty()) {
             int data = pq.top().first;
-            int i = pq.top().second.first;
-            Node* j = pq.top().second.second;
+            Node* node = pq.top().second;
             pq.pop();
             Node* newNode = new Node(data);
             if(head == NULL) {
@@ -64,8 +63,8 @@ class Solution{
                 tail->next = newNode;
                 tail = tail->next;
             }
-            if(j->next != NULL) {
-                pq.push({j->next->data,{i, j->next}});
+            if(node->next != NULL) {
+                pq.push({node->next->data, node->next});
             }
         }
         tail->next = NULL;
