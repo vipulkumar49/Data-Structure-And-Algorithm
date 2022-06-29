@@ -3,7 +3,7 @@ public:
     int evalRPN(vector<string>& tokens) {
         stack<int> s;
         int n = tokens.size();
-        for(auto const &t : tokens) {
+        for(const string &t : tokens) {
             if(isdigit(t[0])) {
                 s.push(stoi(t));
             }
