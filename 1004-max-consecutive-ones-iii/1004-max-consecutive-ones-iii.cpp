@@ -11,7 +11,7 @@ public:
                 if(nums[ws] == 0) cnt--;
                 ws++;
             }
-            len = max(len, we - ws);
+            if(we - ws > len) len = we - ws; 
         }
         return len;
     }
