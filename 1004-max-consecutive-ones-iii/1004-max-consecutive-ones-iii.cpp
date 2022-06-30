@@ -7,7 +7,7 @@ public:
         while(we < n) {
             if(nums[we] == 0) cnt++;
             we++;
-            while(cnt > k) {
+            while(cnt > k && ws <= we) {
                 if(nums[ws] == 0) cnt--;
                 ws++;
             }
