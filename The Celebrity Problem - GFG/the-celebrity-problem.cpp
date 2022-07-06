@@ -12,22 +12,18 @@ class Solution
     public:
     //Function to find if there is a celebrity in the party or not.
     int celebrity(vector<vector<int> >& M, int n) {
-        int m = M[0].size();
-        vector<int> degree(n);
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < m; j++) {
-                if(M[i][j] == 1) {
-                    degree[j]++;
-                    degree[i]--;
-                }
-            }
+        int a = 0, b = n - 1;
+        while(a < b) {
+            if(M[a][b] == 1) 
+                a++;
+            else 
+                b--;
         }
         for(int i = 0; i < n; i++) {
-            if(degree[i] == n - 1) {
-                return i;
-            } 
+            if(i != a && (!M[i][a] || M[a][i])) 
+                return -1;
         }
-        return -1;
+        return a;
     }
 };
 
