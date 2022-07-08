@@ -1,8 +1,6 @@
 class Solution {
 public:
     void union_set(int a, int b, vector<int> &parent, vector<int> &rank) {
-        a = find_set(a, parent);
-        b = find_set(b, parent);
         if(rank[a] > rank[b]) {
             parent[b] = a;
         }
@@ -29,7 +27,7 @@ public:
             parent[i] = i;
         }
         for(int i = 0; i < m; i++) {
-            union_set(connections[i][0], connections[i][1], parent, rank);
+            union_set(find_set(connections[i][0], parent), find_set(connections[i][1], parent), parent, rank);
         }
         int ans = 0;
         for(int i = 0; i < n; i++) {
