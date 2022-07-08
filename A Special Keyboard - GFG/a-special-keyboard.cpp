@@ -16,11 +16,11 @@ class Solution {
         for(int i = 0; i < n; i++) {
             mp[S1[i]] = i;
         }
-        int idx = 0, ans = 0;
+        int pos = 0, ans = 0;
         int m = S2.size();
         for(int i = 0; i < m; i++) {
-            ans += abs(mp[S2[i]] - idx);
-            idx = mp[S2[i]];
+            ans += abs(mp[S2[i]] - pos);
+            pos = mp[S2[i]];
         }
         return ans;
     }
