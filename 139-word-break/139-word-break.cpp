@@ -6,7 +6,7 @@ public:
         unordered_set<string> word(wordDict.begin(), wordDict.end());
         dp[0] = true;
         for(int i = 1; i <= n; i++) {
-            for(int j = i - 1; j >= 0; j--) {
+            for(int j = 0; j < i; j++) {
                 if(dp[j] == true && word.find(s.substr(j, i - j)) != word.end()) {
                     dp[i] = true;
                     break;
