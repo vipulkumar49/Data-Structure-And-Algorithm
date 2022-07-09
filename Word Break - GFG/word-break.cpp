@@ -14,26 +14,20 @@ using namespace std;
 class Solution
 {
 public:
-    bool isWordBreak(string A, unordered_set<string> &s, int i, string str) {
-        // Base Case
-        int n = A.size();
-        if(i == n) {
-            if(str.empty() || s.find(str) != s.end()) return true;
-            else return false;
-        }
-        str += A[i];
-        bool res = false;
-        if(s.find(str) != s.end()) {
-            res = isWordBreak(A, s, i + 1, "");
-        }
-        if(res == true) return true;
-        return isWordBreak(A, s, i + 1, str);
-    }
     int wordBreak(string A, vector<string> &B) {
-        unordered_set<string> s;
-        string str;
-        for(int i = 0; i < B.size(); i++) s.insert(B[i]);
-        return isWordBreak(A, s, 0, str);
+        int n = A.size();
+        vector<int> dp(n + 1, false);
+        dp[0] = true;
+        unordered_set<string> dict(B.begin(), B.end());
+        for(int i = 1; i <= n; i++) {
+            for(int j = i - 1; j >= 0; j--) {
+                if(dp[j] && dict.find(A.substr(j, i - j)) != dict.end()) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[n];
     }
 };
 
