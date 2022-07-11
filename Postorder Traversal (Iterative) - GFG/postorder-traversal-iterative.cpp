@@ -106,14 +106,14 @@ class Solution{
                 node = node->left;
             }
             node = s.top();
-            if(node->right == NULL|| node->right == pre) {
+            if(node->right != NULL && node->right != pre) {
+                node = node->right;
+            }
+            else {
                 post_order.push_back(node->data);
                 s.pop();
                 pre = node;
                 node = NULL;
-            }
-            else {
-                node = node->right;
             }
         }
         return post_order;
