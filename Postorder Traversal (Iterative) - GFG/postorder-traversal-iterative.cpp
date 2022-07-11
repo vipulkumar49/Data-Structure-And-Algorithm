@@ -99,20 +99,21 @@ class Solution{
     vector<int> postOrder(Node* node) {
         stack<Node*> s;
         vector<int> post_order;
+        Node* pre = NULL;
         while(node != NULL || !s.empty()) {
             while(node) {
-                s.push(node);
                 s.push(node);
                 node = node->left;
             }
             node = s.top();
-            s.pop();
-            if(!s.empty() && node == s.top()) {
-                node = node->right;
+            if(node->right == NULL|| node->right == pre) {
+                post_order.push_back(node->data);
+                s.pop();
+                pre = node;
+                node = NULL;
             }
             else {
-                post_order.push_back(node->data);
-                node = NULL;
+                node = node->right;
             }
         }
         return post_order;
