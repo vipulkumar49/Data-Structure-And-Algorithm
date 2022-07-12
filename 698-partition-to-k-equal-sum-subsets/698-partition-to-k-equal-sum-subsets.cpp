@@ -36,6 +36,7 @@ public:
         if(sum % k != 0) return false;
         vector<int> subset(k, 0);
         int target = sum / k;
+        sort(nums.begin(), nums.end(), greater<int>());
         return isPartitionPossible(nums, k, subset, target, 0);
     }
 };
