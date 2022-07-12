@@ -21,10 +21,12 @@ public:
         return false;
     }
     bool makesquare(vector<int>& matchsticks) {
-        if(matchsticks.empty()) return false;
+        if(matchsticks.size() < 4) return false;
         vector<int> sides(4, 0);
+        int sum = accumulate(matchsticks.begin(), matchsticks.end(), 0);
+        if(sum % 4 != 0) return false;
         sort(matchsticks.begin(), matchsticks.end(), greater<int>());
-        int target = accumulate(matchsticks.begin(), matchsticks.end(), 0) / 4;
+        int target = sum / 4;
         return isSquarePossible(sides, matchsticks, 0, target);
     }
 };
