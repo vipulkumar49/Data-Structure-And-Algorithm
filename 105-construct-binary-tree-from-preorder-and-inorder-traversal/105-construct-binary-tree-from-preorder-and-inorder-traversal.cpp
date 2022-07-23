@@ -11,20 +11,23 @@
  */
 class Solution {
 public:
-    TreeNode* getBinaryTree(vector<int> preorder, vector<int> inorder, int preorder_start, int preorder_end, int inorder_start, int inorder_end) {
-        if(inorder_start > inorder_end) return NULL;
-        int root_value = preorder[preorder_start];
+    TreeNode* buildBinaryTree(vector<int> &preorder, vector<int> &inorder, int ps, int pe, int is, int ie) {
+        if(is > ie) return NULL;
+        
+        int root_value = preorder[ps];
         TreeNode* root = new TreeNode(root_value);
+        // get the pos of root
         int pos = -1;
-        for(int i = inorder_start; i <= inorder_end; i++) {
+        for(int i = is; i <= ie; i++) {
             if(inorder[i] == root_value) pos = i;
         }
-        root->left = getBinaryTree(preorder, inorder, preorder_start + 1, preorder_start + pos - inorder_start, inorder_start, pos - 1); 
-        root->right = getBinaryTree(preorder, inorder, preorder_start + pos - inorder_start + 1, preorder_end, pos + 1, inorder_end);
+        // recursive call on left and right subtree
+        root->left = buildBinaryTree(preorder, inorder, ps + 1, ps + pos - is, is, pos - 1); 
+        root->right = buildBinaryTree(preorder, inorder, ps + pos - is + 1, pe, pos + 1, ie);
         return root;
     }
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        int n = preorder.size();
-        return getBinaryTree(preorder, inorder, 0, n - 1, 0, n - 1);
+        int n = preorder.size(); // size of array 
+        return buildBinaryTree(preorder, inorder, 0, n - 1, 0, n - 1);
     }
 };
